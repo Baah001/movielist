@@ -1,0 +1,44 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Install xvfb and run tests
+      - name: Run tests in virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          xvfb-run --server-args="-screen 0 1920x1080x24" npm test -- --watch=false
+
+      # Step 5: Lint the code
+      - name: Lint the code
+        run: npm run lint
+
+      # Step 6: Build the project
+      - name: Build the project
+        run: npm run build
