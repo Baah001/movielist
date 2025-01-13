@@ -2,6 +2,36 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
 
+This application utilizes the TMDB Discover Movie endpoint with the with_cast and with_crew parameters to fetch movies featuring Tom Hanks and directed by Steven Spielberg.
+
+API Limitation
+
+The TMDB API does not allow specifying roles (e.g., actor or director) in the with_cast or with_crew parameters. As a result:
+
+    •	The results may include movies where Tom Hanks or Steven Spielberg participated in a different capacity (e.g., producer, cameo).
+    •	To ensure accuracy, further filtering would require fetching movie details (using the Credits endpoint) for each result. However, this would drastically increase the number of API calls, making it unfeasible.
+
+Trade-offs
+
+This approach balances efficiency and scalability, relying on the assumption that the API data is generally accurate for filtering by cast and crew. Some inaccuracies may still occur depending on the data provided by the API.
+
+Future Considerations
+
+    •	Introduce additional filtering logic by querying movie credits where feasible.
+    •	Leverage caching or server-side aggregation to optimize API calls for advanced use cases.
+
+## Setting Up the TMDB API Key
+
+1. Register at [TMDB](https://www.themoviedb.org/documentation/api) and get an API key.
+2. Copy `src/environments/environment.sample.ts` to:
+
+- `src/environments/environment.ts`
+- `src/environments/environment.prod.ts`
+
+3. Replace `your_api_key_here` with your TMDB API key.
+
+**Important:** Never expose your API key in the repository or public files.
+
 ## Development server
 
 To start a local development server, run:

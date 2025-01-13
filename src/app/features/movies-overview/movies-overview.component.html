@@ -1,0 +1,9 @@
+<app-movie-grid [movies]="movies()" />
+
+@if (moviesResponse(); as response) {
+  <app-paginator
+    [currentPage]="response.page"
+    [pageSize]="10"
+    [totalItems]="response.total_results"
+  />
+}

@@ -1,0 +1,13 @@
+<div class="movie-overview__rating">
+  <nz-rate
+    [nzCount]="5"
+    [ngModel]="getRating(voteAverage())"
+    [nzDisabled]="true"
+    [nzTooltips]="['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']"
+    class="movie-overview__rating-stars"
+  >
+  </nz-rate>
+  <span class="movie-overview__rating-score">
+    {{ voteAverage().toFixed(1) }}
+  </span>
+</div>

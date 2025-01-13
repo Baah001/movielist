@@ -1,0 +1,19 @@
+<div
+  class="movie-card"
+  tabindex="0"
+  role="button"
+  [attr.aria-label]="'View details for ' + movie().title"
+  (keydown.enter)="onCardClick()"
+>
+  <div class="movie-card__poster">
+    <img
+      [src]="getImageUrl(movie().poster_path)"
+      [alt]="movie().title"
+      class="movie-card__poster-image"
+    />
+  </div>
+  <div class="movie-card__details">
+    <h3 class="movie-card__title">{{ movie().title }}</h3>
+    <app-rating [voteAverage]="movie().vote_average" />
+  </div>
+</div>

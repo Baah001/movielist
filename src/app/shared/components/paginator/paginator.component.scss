@@ -1,0 +1,45 @@
+@use 'variables' as *;
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: $margin-medium;
+
+  &__button {
+    background: $color-background-dark;
+    border: 1px solid $color-border-dark;
+    color: $color-white;
+    margin: 0 $spacing-small;
+    padding: $button-padding-vertical $button-padding-horizontal;
+    cursor: pointer;
+    transition:
+      background-color $transition-default,
+      border-color $transition-default;
+
+    &:hover,
+    &:focus {
+      background-color: $color-hover-red;
+      border-color: $color-hover-red;
+      outline: none;
+    }
+
+    &--active {
+      background-color: $color-active-red;
+      border-color: $color-active-red;
+      color: $color-white;
+    }
+
+    &:disabled {
+      background-color: $color-disabled-dark;
+      border-color: $color-border-disabled;
+      color: $color-text-disabled;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+
+:host ::ng-deep .ant-pagination-item {
+  background: transparent;
+  border: none;
+}

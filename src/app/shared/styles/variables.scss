@@ -1,0 +1,42 @@
+// Colors
+$color-background-dark: #222;
+$color-background-darker: #1c1c1c;
+$color-border-dark: #333;
+$color-border-disabled: #555;
+$color-hover-shadow: rgba(0, 0, 0, 0.5);
+$color-shadow-black: rgba(0, 0, 0, 0.8);
+$color-hover-red: #e50914;
+$color-active-red: #e50914;
+$color-disabled-dark: #333;
+$color-text-disabled: #777;
+$color-white: #ffffff;
+$color-netflix-red: #e50914;
+$color-gold: #f5c518;
+$color-light-gray: #e6e6e6;
+
+// Spacing and Sizes
+$border-radius: 8px;
+$padding-small: 10px;
+$poster-height: 300px;
+$spacing-small: 5px;
+$margin-medium: 20px;
+$button-padding-vertical: 5px;
+$button-padding-horizontal: 10px;
+$spacing-medium: 8px;
+$margin-small: 10px;
+
+// Typography
+$font-size-base: 1rem;
+$font-size-small: 0.875rem;
+$font-weight-bold: 700;
+$font-size-large: 1.2rem;
+$font-size-small: 0.9rem;
+$font-weight-semibold: 600;
+
+// Shadows
+$box-shadow-light: 0 4px 10px $color-shadow-black;
+$box-shadow-hover: 0 8px 20px rgba(0, 0, 0, 1);
+
+// Transitions
+$transition-default: 0.3s ease;
+$transition-transform: 0.3s;

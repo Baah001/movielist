@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+.movie-card {
+  background-color: $color-background-dark;
+  border-radius: $border-radius;
+  overflow: hidden;
+  transition:
+    transform $transition-transform,
+    box-shadow $transition-transform;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: $box-shadow-hover;
+    transition:
+      transform $transition-default,
+      box-shadow $transition-default;
+  }
+
+  &__poster {
+    height: $poster-height;
+    overflow: hidden;
+
+    &-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__details {
+    padding: $padding-small;
+    text-align: center;
+
+    &-title {
+      font-size: $font-size-base;
+      margin: 0;
+      color: $color-white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.movie-overview__card {
+  background-color: $color-background-darker;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+  transition:
+    transform $transition-transform,
+    box-shadow $transition-transform;
+  overflow: hidden;
+  cursor: pointer;
+  padding: $padding-small;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: $box-shadow-hover;
+  }
+}
+
+.movie-card__title {
+  font-size: $font-size-base;
+  font-weight: 700;
+  text-align: center;
+  color: $color-white;
+}
+
+.movie-card__poster-image {
+  width: 100%;
+  border-bottom: 4px solid $color-netflix-red;
+  transition:
+    transform $transition-default,
+    filter $transition-default;
+
+  &:hover {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+  }
+}
