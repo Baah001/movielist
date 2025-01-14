@@ -1,17 +1,50 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn } from '@angular/common/http';
-
-import { tmdbInterceptor } from './tmdb.interceptor';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 
 describe('tmdbInterceptor', () => {
-  const interceptor: HttpInterceptorFn = (req, next) =>
-    TestBed.runInInjectionContext(() => tmdbInterceptor(req, next));
+  let httpClient: HttpClient;
+  let httpMock: HttpTestingController;
+
+  const mockEnvironment = {
+    tmdbBaseUrl: 'https://api.themoviedb.org/3/',
+    tmdbApiKey: 'test_api_key',
+  };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+        { provide: 'environment', useValue: mockEnvironment },
+      ],
+    });
+
+    httpClient = TestBed.inject(HttpClient);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
   });
+
+  it('should not modify non-API requests', fakeAsync(() => {
+    const externalUrl = 'https://example.com/test';
+    const mockResponse = { data: 'test' };
+
+    httpClient.get(externalUrl).subscribe();
+
+    tick();
+
+    const req = httpMock.expectOne(externalUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  }));
 });

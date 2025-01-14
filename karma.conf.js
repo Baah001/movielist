@@ -18,6 +18,14 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/movielist'),
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      check: {
+        global: {
+          statements: 80,
+          branches: 70,
+          functions: 75,
+          lines: 80,
+        },
+      },
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -25,7 +33,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     singleRun: isCI,
-    browsers: isCI ? ['ChromeHeadless'] : ['Chrome'], // Use ChromeHeadless in CI, Chrome locally
+    browsers: isCI ? ['ChromeHeadless'] : ['Chrome'],
     restartOnFileChange: true,
   });
 };
