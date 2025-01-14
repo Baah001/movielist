@@ -74,6 +74,20 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
+## Running unit tests with coverage
+
+Run the following command to generate a code coverage report:
+
+```bash
+npm run test-coverage
+```
+
+The coverage report will be available in the coverage directory. Open coverage/movielist/index.html in your browser to view the detailed report.
+
+    •	Aim for meaningful tests that provide good coverage across components, services, and critical logic.
+    •	Focus on edge cases and potential failure points in your application.
+    •	Regularly monitor and improve the coverage to ensure application reliability and maintainability.
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
