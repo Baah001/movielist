@@ -90,7 +90,7 @@ export class TmdbApiService {
     actorId: number,
     directorId: number,
     page = 1,
-  ): Observable<PaginatedResultsInterface<MovieInterface>> {
+  ): Observable<PaginatedResultsInterface<MovieInterface> | null> {
     const url = `/api/discover/movie`;
 
     return this.http
@@ -106,7 +106,7 @@ export class TmdbApiService {
           const errorMessage = `Error fetching movies with actor ID "${actorId}" and director ID "${directorId}" on page ${page}.`;
           this.snackbarService.showError(errorMessage);
           console.error(errorMessage, error);
-          return of(error);
+          return of(null);
         }),
       );
   }

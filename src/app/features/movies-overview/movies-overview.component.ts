@@ -38,9 +38,11 @@ export class MoviesOverviewComponent implements OnInit {
       const moviesResponse = await firstValueFrom(
         this.tmdbService.getMoviesByActorAndDirector(actor.id, director.id),
       );
-      console.log(moviesResponse.results);
-      this.moviesResponse.set(moviesResponse);
-      this.movies.set(moviesResponse.results);
+
+      if (moviesResponse) {
+        this.moviesResponse.set(moviesResponse);
+        this.movies.set(moviesResponse.results);
+      }
     }
   }
 

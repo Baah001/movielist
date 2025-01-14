@@ -9,6 +9,8 @@
     "test": "ng test",
     "test-coverage": "ng test --code-coverage",
     "lint": "ng lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "prettier-fix": "npx prettier --write ."
   },
   "private": true,
@@ -39,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
     "angular-eslint": "19.0.2",
+    "cypress": "^13.17.0",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-relative-import-paths": "^1.6.1",
