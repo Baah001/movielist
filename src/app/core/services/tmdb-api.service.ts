@@ -110,4 +110,21 @@ export class TmdbApiService {
         }),
       );
   }
+
+  /**
+   * Fetches detailed information for a specific movie by its ID.
+   * @param id - The unique ID of the movie to fetch details for.
+   * @returns An observable containing the movie details or an error message if the request fails.
+   */
+  getMovieDetail(id: number): Observable<MovieInterface | null> {
+    const url = `/api/movie/${id}`;
+    return this.http.get<MovieInterface>(url).pipe(
+      catchError((error) => {
+        const errorMessage = `Error fetching details for movie ID "${id}".`;
+        this.snackbarService.showError(errorMessage);
+        console.error(errorMessage, error);
+        return of(null);
+      }),
+    );
+  }
 }

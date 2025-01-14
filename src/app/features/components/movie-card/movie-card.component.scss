@@ -4,6 +4,7 @@
   background-color: $color-background-dark;
   border-radius: $border-radius;
   overflow: hidden;
+  display: block;
   transition:
     transform $transition-transform,
     box-shadow $transition-transform;
@@ -14,6 +15,17 @@
     transition:
       transform $transition-default,
       box-shadow $transition-default;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-netflix-red;
+    outline-offset: 4px;
+    transform: scale(1.03);
+    box-shadow: $box-shadow-hover;
   }
 
   &__poster {
