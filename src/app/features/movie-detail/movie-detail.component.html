@@ -1,0 +1,38 @@
+@if (movie(); as movie) {
+  <div class="movie-detail-container">
+    <div class="movie-detail__backdrop">
+      <img [src]="getImageUrl(movie.backdrop_path)" [alt]="movie.title" />
+    </div>
+    <div class="movie-detail__content">
+      <div class="movie-detail__poster">
+        <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" />
+      </div>
+      <div class="movie-detail__info">
+        <h1 class="movie-detail__title">{{ movie.title }}</h1>
+        <p class="movie-detail__release-date">
+          Release Date: <strong>{{ movie.release_date }}</strong>
+        </p>
+        <div class="movie-detail__rating">
+          <app-rating [voteAverage]="movie.vote_average" />
+        </div>
+        <p class="movie-detail__language">
+          Original Language:
+          <strong>{{ movie.original_language | uppercase }}</strong>
+        </p>
+        <p class="movie-detail__popularity">
+          Popularity: <strong>{{ movie.popularity }}</strong>
+        </p>
+        <p class="movie-detail__overview">{{ movie.overview }}</p>
+        <div class="movie-detail__genres">
+          Genres:
+          @for (genre of movie.genres; track genre) {
+            <span class="movie-detail__genre">{{ genre.name }}</span>
+          }
+        </div>
+        <button class="back-to-overview" [routerLink]="['/']">
+          Back to Overview
+        </button>
+      </div>
+    </div>
+  </div>
+}

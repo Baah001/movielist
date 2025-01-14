@@ -1,0 +1,127 @@
+@use 'variables' as *;
+
+.movie-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $color-white;
+  font-family: 'Roboto', sans-serif;
+
+  .movie-detail__backdrop {
+    width: 100%;
+    height: auto;
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      max-height: 40rem;
+    }
+  }
+
+  .movie-detail__content {
+    display: flex;
+    flex-direction: row;
+    margin-top: calc(-#{$poster-height} / 3);
+    padding: $padding-small;
+    background: $color-background-darker;
+    border-radius: $border-radius;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: $box-shadow-light;
+    position: relative;
+
+    .movie-detail__poster {
+      flex-shrink: 0;
+      margin-right: $margin-medium;
+
+      img {
+        border-radius: $border-radius;
+        max-width: 200px;
+        box-shadow: $box-shadow-light;
+      }
+    }
+
+    .movie-detail__info {
+      display: flex;
+      flex-direction: column;
+
+      .movie-detail__title {
+        font-size: $font-size-large;
+        font-weight: $font-weight-bold;
+        margin: 0;
+        color: $color-netflix-red;
+      }
+
+      .movie-detail__release-date,
+      .movie-detail__language,
+      .movie-detail__popularity {
+        margin: $margin-small 0;
+        font-size: $font-size-base;
+
+        strong {
+          font-weight: $font-weight-semibold;
+        }
+      }
+
+      .movie-detail__overview {
+        margin: $margin-medium 0;
+        font-size: $font-size-base;
+        line-height: 1.5;
+      }
+
+      .movie-detail__genres {
+        margin-top: $margin-small;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .movie-detail__genre {
+          background-color: $color-border-dark;
+          color: $color-white;
+          padding: $spacing-small $spacing-medium;
+          margin: $spacing-small;
+          border-radius: $border-radius;
+          font-size: $font-size-small;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+
+    .back-to-overview {
+      margin-top: $margin-medium;
+      padding: $button-padding-vertical $button-padding-horizontal;
+      background-color: $color-netflix-red;
+      color: $color-white;
+      border: none;
+      border-radius: $border-radius;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      cursor: pointer;
+      width: 100%;
+      transition:
+        background-color $transition-default,
+        transform $transition-default;
+
+      &:hover {
+        background-color: $color-hover-red;
+        transform: scale(1.05);
+      }
+
+      &:focus {
+        outline: 2px solid $color-light-gray;
+        outline-offset: 2px;
+      }
+
+      &:active {
+        background-color: $color-active-red;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .movie-overview__rating {
+  justify-content: flex-start !important;
+}

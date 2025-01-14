@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MovieGridComponent } from './movie-grid.component';
 import { MovieInterface } from 'src/app/shared/models/tmdb.interface';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('MovieGridComponent', () => {
   let component: MovieGridComponent;
@@ -8,6 +10,14 @@ describe('MovieGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: mockMovies[0].id }),
+          },
+        },
+      ],
       imports: [MovieGridComponent],
     }).compileComponents();
 
@@ -28,6 +38,7 @@ const mockMovies: MovieInterface[] = [
     backdrop_path: '/bdD39MpSVhKjxarTxLSfX6baoMP.jpg',
     genre_ids: [18, 36, 10752],
     id: 857,
+    genres: [],
     original_language: 'en',
     original_title: 'Saving Private Ryan',
     overview:
@@ -44,6 +55,7 @@ const mockMovies: MovieInterface[] = [
     adult: false,
     backdrop_path: '/Ag6qhzsJd3k1NKuNrG9RmhZDMh7.jpg',
     genre_ids: [18, 80],
+    genres: [],
     id: 640,
     original_language: 'en',
     original_title: 'Catch Me If You Can',
