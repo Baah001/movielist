@@ -28,17 +28,37 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Install xvfb and run tests
+      # Step 4: Ensure `environment.ts` file exists
+      - name: Ensure environment.ts file exists
+        run: |
+          FILE="src/environments/environment.ts"
+          if [ ! -f "$FILE" ]; then
+            echo "Creating environment.ts..."
+            echo "export const environment = {" > $FILE
+            echo "  production: false," >> $FILE
+            echo "  tmdbApiKey: 'your_dummy_api_key'," >> $FILE
+            echo "  tmdbBaseUrl: 'https://api.themoviedb.org/3/'" >> $FILE
+            echo "};" >> $FILE
+            echo "environment.ts created successfully."
+          else
+            echo "environment.ts already exists."
+          fi
+
+      # Step 5: Run lint on the newly created environment.ts
+      - name: Lint environment.ts
+        run: npx eslint src/environments/environment.ts --fix
+
+      # Step 6: Run tests in virtual display
       - name: Run tests in virtual display
         run: |
           sudo apt-get update
           sudo apt-get install -y xvfb
           xvfb-run --server-args="-screen 0 1920x1080x24" npm test -- --watch=false
 
-      # Step 5: Lint the code
+      # Step 7: Lint the entire codebase
       - name: Lint the code
         run: npm run lint
 
-      # Step 6: Build the project
+      # Step 8: Build the project
       - name: Build the project
         run: npm run build

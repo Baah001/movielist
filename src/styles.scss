@@ -1,1 +1,40 @@
+body {
+  background-color: #141414;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
 /* You can add global styles to this file, and also import other style files */
+/* Netflix-Style Snackbar */
+.custom-snackbar {
+  background-color: #141414; /* Netflix dark background */
+  color: #ffffff; /* White text */
+  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  font-size: 16px;
+  font-weight: 400; /* Regular weight for body text */
+  padding: 16px;
+  border-radius: 4px; /* Subtle rounding */
+  border: 1px solid #333333; /* Add a subtle border */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.custom-snackbar-success {
+  border-left: 4px solid #e50914; /* Netflix red for success highlight */
+}
+
+.custom-snackbar-error {
+  border-left: 4px solid #b81d24; /* Darker red for errors */
+}
+
+.custom-snackbar-warning {
+  border-left: 4px solid #f5c518; /* Netflix yellow warning */
+}
+
+/* Netflix-style notification container */
+.ant-notification-notice {
+  background-color: #141414 !important; /* Override container background */
+  color: #ffffff !important; /* White text */
+  border-radius: 6px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Slightly heavier shadow */
+}

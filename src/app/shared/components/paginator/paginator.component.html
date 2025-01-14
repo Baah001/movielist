@@ -1,0 +1,49 @@
+<nz-pagination
+  [nzPageIndex]="currentPage"
+  [nzTotal]="totalItems()"
+  [nzPageSize]="pageSize()"
+  (nzPageIndexChange)="onPageChange($event)"
+  [nzItemRender]="customItemTemplate"
+  class="paginator"
+  role="navigation"
+  aria-label="Pagination Navigation"
+>
+</nz-pagination>
+
+<ng-template #customItemTemplate let-type let-page="page">
+  @if (type === 'page') {
+    <button
+      (click)="onPageChange(page)"
+      tabindex="0"
+      [attr.aria-label]="'Go to page ' + page"
+      class="paginator__button paginator__button--page"
+      [class.paginator__button--active]="page === currentPage"
+    >
+      {{ page }}
+    </button>
+  }
+
+  @if (type === 'prev') {
+    <button
+      (click)="onPageChange(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      tabindex="0"
+      aria-label="Previous Page"
+      class="paginator__button paginator__button--prev"
+    >
+      «
+    </button>
+  }
+
+  @if (type === 'next') {
+    <button
+      (click)="onPageChange(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+      tabindex="0"
+      aria-label="Next Page"
+      class="paginator__button paginator__button--next"
+    >
+      »
+    </button>
+  }
+</ng-template>

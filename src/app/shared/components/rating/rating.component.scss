@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+.movie-overview__rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-medium;
+  margin-top: $margin-small;
+
+  &-stars {
+    font-size: $font-size-large;
+    color: $color-gold;
+  }
+
+  &-score {
+    font-size: $font-size-small;
+    color: $color-light-gray;
+    font-weight: $font-weight-semibold;
+  }
+}
