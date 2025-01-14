@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-pages": "ng build --output-path=dist/movielist --base-href=/movielist/",
+    "deploy:gh-pages": "npx angular-cli-ghpages --dir=dist/movielist/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage",

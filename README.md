@@ -93,10 +93,12 @@ The coverage report will be available in the coverage directory. Open coverage/m
 For end-to-end (e2e) testing, run:
 
 ```bash
-ng e2e
+    npm run "cypress:open"
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The next logical step for enhancing the project would be integrating Cypress end-to-end tests into the GitHub CI pipeline. This process involves configuring Cypress to run as part of your CI workflow. However, this setup requires additional considerations, such as installing Cypress dependencies, configuring the CI environment (e.g., installing a headless browser), and ensuring proper handling of test artifacts (like videos and screenshots).
+
+While this step is crucial for comprehensive testing, it falls outside the current scope.
 
 ## Additional Resources
 

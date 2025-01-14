@@ -9,11 +9,13 @@ import {
 import { MovieGridComponent } from 'src/app/features/components/movie-grid/movie-grid.component';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
 import { PaginatedResultsInterface } from 'src/app/shared/models/paginated-results.interface';
+import { NzResultComponent } from 'ng-zorro-antd/result';
 
 @Component({
   selector: 'app-movies-overview',
-  imports: [MovieGridComponent, PaginatorComponent],
+  imports: [MovieGridComponent, PaginatorComponent, NzResultComponent],
   templateUrl: './movies-overview.component.html',
+  styleUrl: './movies-overview.component.scss',
   standalone: true,
 })
 export class MoviesOverviewComponent implements OnInit {
