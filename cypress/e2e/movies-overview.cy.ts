@@ -65,23 +65,32 @@ describe('Movies Overview', () => {
     cy.get('.movie-detail__genres').should('contain', 'Drama');
   });
 
-  // it('should handle empty movie results gracefully', () => {
-  //   // Mock the API call for an empty response
-  //   cy.intercept(
-  //     {
-  //       method: 'GET',
-  //       url: /\/3\/discover\/movie\?.*with_cast=.*/,
-  //     },
-  //     { body: { results: [], total_results: 0 } }
-  //   ).as('getEmptyMovies');
-  //
-  //   // Visit the homepage
-  //   cy.visit('/');
-  //   cy.wait('@getEmptyMovies');
-  //
-  //   // Assert that a no-results message is displayed
-  //   cy.contains('No movies found').should('exist');
-  // });
+  it('should handle empty movie results gracefully', () => {
+    cy.fixture('person-mock.json').then((data) => {
+      cy.intercept(
+        {
+          method: 'GET',
+          url: /\/3\/search\/person\?.*query=Tom%20Hanks.*/,
+        },
+        data,
+      ).as('getPersonTomHanks');
+    });
+
+    cy.intercept(
+      {
+        method: 'GET',
+        url: /\/3\/discover\/movie\?.*with_cast=.*/,
+      },
+      { body: { results: [], total_results: 0 } },
+    ).as('getEmptyMovies');
+
+    // Visit the homepage
+    cy.visit('/');
+    cy.wait('@getEmptyMovies');
+
+    // Assert that a no-results message is displayed
+    cy.contains('No data to show').should('exist');
+  });
 
   it('should navigate back to overview from detail page', () => {
     // Mock the API call for movie details

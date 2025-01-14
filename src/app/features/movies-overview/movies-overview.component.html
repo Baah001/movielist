@@ -1,9 +1,21 @@
-<app-movie-grid [movies]="movies()" />
+<div class="movie-section">
+  <h1 class="section-title">
+    Discover Tom Hanks Movies Directed by Steven Spielberg
+  </h1>
 
-@if (moviesResponse(); as response) {
-  <app-paginator
-    [currentPage]="response.page"
-    [pageSize]="10"
-    [totalItems]="response.total_results"
-  />
-}
+  @if (movies().length) {
+    <app-movie-grid [movies]="movies()"></app-movie-grid>
+  } @else {
+    <div class="no-result">
+      <nz-result nzStatus="warning" nzTitle="No data to show"></nz-result>
+    </div>
+  }
+
+  @if (moviesResponse(); as response) {
+    <app-paginator
+      [currentPage]="response.page"
+      [pageSize]="10"
+      [totalItems]="response.total_results"
+    />
+  }
+</div>
