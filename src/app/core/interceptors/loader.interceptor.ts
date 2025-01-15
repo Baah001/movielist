@@ -11,17 +11,24 @@ import { catchError, finalize, tap } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
 
 /**
- * A loader interceptor that displays a loader if an HTTP request takes more half a second.
+ * Interceptor to display a loader when HTTP requests are in progress.
+ * Ensures a loader appears if a request takes longer than half a second.
  */
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
   private pendingLoaderTimeout: number | null = null;
   private readonly activeRequests = new Set<HttpRequest<unknown>>();
   private loaderShown = false;
-  private readonly showLoaderTimeOut = 500; // halve a second
+  private readonly showLoaderTimeOut = 500; // Half a second
 
   constructor(private readonly loaderService: LoaderService) {}
 
+  /**
+   * Intercepts HTTP requests to manage the loader state.
+   * @param req - The outgoing HTTP request.
+   * @param next - The next handler in the chain.
+   * @returns An observable of the HTTP event stream.
+   */
   intercept(
     req: HttpRequest<unknown>,
     next: HttpHandler,
@@ -39,9 +46,11 @@ export class LoaderInterceptor implements HttpInterceptor {
     );
   }
 
+  /**
+   * Schedules the loader to appear if this is the first active request.
+   * Ensures the loader is shown after a small delay to avoid flickering.
+   */
   private scheduleLoaderToShow(): void {
-    // If this is the first active request and the loader is not already shown,
-    // schedule the loader to be shown after a delay
     if (this.activeRequests.size === 1 && !this.loaderShown) {
       this.pendingLoaderTimeout = setTimeout(() => {
         this.loaderShown = true;
@@ -50,9 +59,11 @@ export class LoaderInterceptor implements HttpInterceptor {
     }
   }
 
+  /**
+   * Handles the HTTP response to cancel any pending loader display.
+   * @param event - The HTTP event to handle.
+   */
   private handleResponse(event: HttpEvent<unknown>): void {
-    // If the event is a response, the loader is not already shown, and the loader is scheduled to be shown,
-    // cancel the scheduled loader
     if (
       event instanceof HttpResponse &&
       !this.loaderShown &&
@@ -62,9 +73,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     }
   }
 
+  /**
+   * Decrements active requests and hides the loader if no more requests are pending.
+   */
   private decrementRequestsAndHideLoader(): void {
-    // If there are no more active requests, cancel the scheduled loader if it is scheduled,
-    // hide the loader if it is shown, and reset the loaderShown flag
     if (this.activeRequests.size === 0) {
       if (this.pendingLoaderTimeout !== null) {
         clearTimeout(this.pendingLoaderTimeout);

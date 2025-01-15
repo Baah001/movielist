@@ -11,6 +11,9 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
 import { PaginatedResultsInterface } from 'src/app/shared/models/paginated-results.interface';
 import { NzResultComponent } from 'ng-zorro-antd/result';
 
+/**
+ * Displays an overview of movies featuring specific actors and directors.
+ */
 @Component({
   selector: 'app-movies-overview',
   imports: [MovieGridComponent, PaginatorComponent, NzResultComponent],
@@ -19,17 +22,32 @@ import { NzResultComponent } from 'ng-zorro-antd/result';
   standalone: true,
 })
 export class MoviesOverviewComponent implements OnInit {
+  /**
+   * Holds the response for paginated movie results.
+   */
   moviesResponse = signal<PaginatedResultsInterface<MovieInterface> | null>(
     null,
   );
+
+  /**
+   * Contains the list of movies to be displayed.
+   */
   movies = signal<MovieInterface[]>([]);
 
   constructor(private tmdbService: TmdbApiService) {}
 
+  /**
+   * Lifecycle hook that initializes the component.
+   * Fetches the movies based on actor and director information.
+   */
   ngOnInit(): void {
     this.fetchData().then();
   }
 
+  /**
+   * Fetches movies featuring Tom Hanks and directed by Steven Spielberg.
+   * Retrieves their IDs and then fetches movies based on those IDs.
+   */
   async fetchData(): Promise<void> {
     const [actor, director] = await Promise.all([
       this.getPersonIdByName(FavoriteEntertainersEnum.TomHanks),
@@ -42,12 +60,17 @@ export class MoviesOverviewComponent implements OnInit {
       );
 
       if (moviesResponse) {
-        this.moviesResponse.set(moviesResponse);
-        this.movies.set(moviesResponse.results);
+        this.moviesResponse.set(moviesResponse); // Set the entire response for pagination
+        this.movies.set(moviesResponse.results); // Extract and set the movies list
       }
     }
   }
 
+  /**
+   * Retrieves the ID of a person (actor or director) by their name.
+   * @param personName - The name of the person to search for.
+   * @returns A promise resolving to the person details or null if not found.
+   */
   getPersonIdByName(
     personName: FavoriteEntertainersEnum,
   ): Promise<PersonInterface | null> {
